@@ -1,0 +1,14 @@
+<%
+=begin
+apps: all
+platforms: kubernetes, tanzu-application-catalog
+id: uninstall
+title: Uninstall the chart
+category: get-started
+weight: 20
+highlight: 20
+=end %>
+
+To uninstall your chart deployment, run the command below. Replace the MY-RELEASE with your deployment name. This command removes all the Kubernetes components associated with the chart and deletes the release. The name must start and end with a lower-case alphanumeric character and can only contain alphanumeric character, '-' or '.'.
+
+    $ helm delete MY-RELEASE

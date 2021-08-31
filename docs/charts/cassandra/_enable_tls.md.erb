@@ -1,0 +1,26 @@
+<%
+=begin
+apps: cassandra
+platforms: kubernetes, tanzu-application-catalog
+id: enable_tls
+title: Enable TLS
+category: administration
+weight: 20
+highlight: 20
+=end %>
+
+This chart supports TLS between client and server and between nodes, as explained below:
+
+* For internode cluster encryption, set the *cluster.internodeEncryption* chart parameter to a value different from *none*. Available values are *all*, *dc* or *rack*.
+
+* For client-server encryption, set the *cluster.clientEncryption* chart parameter to *true*.
+
+In both cases, it is also necessary to create a secret containing the keystore and truststore certificates and their corresponding protection passwords. This secret is to be passed to the chart via the *tlsEncryptionSecretName* parameter at deployment-time, as shown below:
+
+~~~
+cluster.internodeEncryption=all
+cluster.clientEncryption=true
+tlsEncryptionSecretName=SECRET-NAME
+~~~
+
+> TIP: The secret may be created in the standard way with the *--from-file=./keystore*, *--from-file=./truststore*, *--from-literal=keystore-password=KEYSTORE_PASSWORD* and *--from-literal=truststore-password=TRUSTSTORE_PASSWORD* options. This assumes that the certificates are in the current working directory and the KEYSTORE_PASSWORD and TRUSTSTORE_PASSWORD placeholders are replaced with the correct keystore and truststore passwords respectively.
